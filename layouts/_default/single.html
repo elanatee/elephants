@@ -3,11 +3,21 @@
 <section class="blog-post">
     <h1>{{ .Title }}</h1>
     <div class="blog-post-subheader">
-        {{ .Date.Format (.Site.Params.dateform | default "January 2, 2006") }}
+        {{ .Date.Format (.Site.Params.dateform | default "January 1, 2006") }}
     </div>
     <div class="blog-post-content">
         {{ .Content }}
     </div>
+    {{ if .Params.tags }}
+    <div>
+        <!-- <p>HELLO WE HAVE TAGS!</p> -->
+        <ul class="post-tags">filed under:
+          {{ range .Params.tags }}
+          <li><a class="tags" href="{{$.Site.BaseURL}}tags/{{ . | urlize }}/">{{ . }}</a></li>
+          {{ end }}
+        </ul>
+    </div>
+    {{ end }}
 </section>
 
 {{ partial "footer.html" . }}

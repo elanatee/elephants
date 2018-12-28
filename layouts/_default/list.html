@@ -1,1 +1,31 @@
-Hello List
+{{ partial "header.html" . }}
+
+{{ $pagename := .Page.Title }}
+{{ $pageurl := .Page.URL }}
+
+{{ if eq $pageurl "/tags/" }}
+    <h3>{{ $pageurl }}</h3>
+    <ul id="all-tags">
+        {{ range $name, $taxonomy := .Site.Taxonomies.tags }}
+            {{ with $.Site.GetPage (printf "/tags/%s" $name) }}
+                <li><a href="{{ .Permalink }}">{{ $name }}</a></li>
+            {{ end }}
+        {{ end }}
+    </ul>
+{{ else }}
+    {{ range $name, $taxonomy := .Site.Taxonomies.tags }}
+        {{ if eq $pageurl (printf "/tags/%s/" $name) }}
+            <h3>{{ $pageurl }}</h3>
+            <ul>
+            {{ range $taxonomy.Pages }}
+                <li><a href="{{ .Permalink}}"> {{ .LinkTitle }} </a> </li>
+            {{ end }}
+            </ul>
+        {{ end }}
+    {{ end }}
+
+
+{{ end }}
+
+
+{{ partial "footer.html" . }}
