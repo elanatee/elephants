@@ -43,14 +43,11 @@ a {
 .post-tags li {
     display: inline-block;
     list-style-type: none;
+    margin-left: .25em;
 }
 
 .post-tags a {
     color: black;
     display: block;
     background: lightgrey;
-}
-
-.blog-post {
-    padding-left: 1em;
 }
